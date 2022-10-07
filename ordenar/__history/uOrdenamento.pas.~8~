@@ -1,0 +1,89 @@
+unit uOrdenamento;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    edtNum1: TEdit;
+    edtNum2: TEdit;
+    edtNum3: TEdit;
+    edtNum4: TEdit;
+    edtNum5: TEdit;
+    memResultado: TMemo;
+    btnOrdemCrescente: TButton;
+    procedure btnOrdemCrescenteClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  TNumeros = array [1 .. 5] of integer;
+
+var
+  Form1: TForm1;
+  numero: TNumeros;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.btnOrdemCrescenteClick(Sender: TObject);
+var
+  i, j, x: integer;
+
+begin
+  numero[1]:= StrToInt(edtNum1.Text);
+  numero[2]:= StrToInt(edtNum2.Text);
+  numero[3]:= StrToInt(edtNum3.Text);
+  numero[4]:= StrToInt(edtNum4.Text);
+  numero[5]:= StrToInt(edtNum5.Text);
+
+  for i := Low(numero) to (High(numero) -1) do
+    for j := i + 1 to High(numero) do
+    begin
+      if numero[i] > numero[j] then
+      begin
+        x:= numero[i];
+        numero[i]:= numero[j];
+        numero[j]:= x;
+      end;
+    end;
+
+    memResultado.Lines.Clear;
+  for i := Low(numero) to High(numero) do
+  begin
+    memResultado.Lines.Add(inttostr(numero[i]));
+  end;
+
+
+
+
+
+
+   {
+  for i := Low(numero) to High(numero) do
+  begin
+    if numero[i] > numero[j] then
+    begin
+      x:= numero[i];
+      numero[i]:= numero[j];
+      numero[j]:= x;
+    end;
+
+  end;
+
+  for i := Low(numero) to High(numero) do
+  begin
+    memResultado.Lines.Add(IntToStr(numero[i]));
+  end;
+
+      }
+
+end;
+
+end.
